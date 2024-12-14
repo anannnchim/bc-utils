@@ -38,3 +38,4 @@ inc/
 /.env
 /.venv
 /temp
+private_config.yaml
