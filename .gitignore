@@ -37,4 +37,4 @@ inc/
 /.idea
 /.env
 /.venv
-/data
+/temp
