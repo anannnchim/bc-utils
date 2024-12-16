@@ -38,6 +38,7 @@ CONTRACT_MAP = {
     "COPPER": {"code": "HG", "cycle": "FHJMNUVZ", "exchange": "COMEX"},
     "COPPER-micro": {"code": "QL", "cycle": "HKNUZ", "exchange": "COMEX"},
     "CORN": {"code": "ZC", "cycle": "HKNUZ", "exchange": "CBOT"},
+    "CORN_mini": {"code": "XN", "cycle": "HKNUZ", "exchange": "CBOT"}, # Add
     "COTTON": {"code": "KG", "cycle": "HKNVZ", "exchange": "NYMEX"},
     "COTTON2": {"code": "CT", "cycle": "HKNVZ", "exchange": "ICE/US"},
     "CRUDE_ICE": {"code": "WI", "cycle": "FGHJKMNQUVXZ", "exchange": "ICE/EU/Com"},

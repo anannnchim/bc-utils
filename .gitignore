@@ -39,3 +39,4 @@ inc/
 /.venv
 /temp
 private_config.yaml
+update_data.log
