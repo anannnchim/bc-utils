@@ -2,6 +2,7 @@ CONTRACT_MAP = {
     "AEX": {"code": "AE", "cycle": "FGHJKMNQUVXZ", "exchange": "EuronextInd"},
     "ALUMINIUM": {"code": "AL", "cycle": "FGHJKMNQUVXZ", "exchange": "COMEX"},
     "AUD": {"code": "A6", "cycle": "HMUZ", "exchange": "CME"},
+    "AUD_micro": {"code": "MG", "cycle": "HMUZ", "exchange": "CME"},  # ADD 2
     "AUDJPY": {"code": "UK", "cycle": "HMUZ", "exchange": "CME"},
     "BB3M": {"code": "BR", "cycle": "HMUZ", "exchange": "CME"},
     "BBCOMM": {"code": "AH", "cycle": "HMUZ", "exchange": "CBOT"},
@@ -37,7 +38,7 @@ CONTRACT_MAP = {
     "COPPER": {"code": "HG", "cycle": "FHJMNUVZ", "exchange": "COMEX"},
     "COPPER-micro": {"code": "QL", "cycle": "HKNUZ", "exchange": "COMEX"},
     "CORN": {"code": "ZC", "cycle": "HKNUZ", "exchange": "CBOT"},
-    "CORN_mini": {"code": "XN", "cycle": "HKNUZ", "exchange": "CBOT"}, # Add
+    "CORN_mini": {"code": "XN", "cycle": "HKNUZ", "exchange": "CBOT"},  # Add 1
     "COTTON": {"code": "KG", "cycle": "HKNVZ", "exchange": "NYMEX"},
     "COTTON2": {"code": "CT", "cycle": "HKNVZ", "exchange": "ICE/US"},
     "CRUDE_ICE": {"code": "WI", "cycle": "FGHJKMNQUVXZ", "exchange": "ICE/EU/Com"},
