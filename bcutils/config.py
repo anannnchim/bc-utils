@@ -51,6 +51,7 @@ CONTRACT_MAP = {
     "DX": {"code": "DX", "cycle": "HMUZ", "exchange": "ICE/US"},
     "ETHANOL": {"code": "ZK", "cycle": "FGHJKMNQUVXZ", "exchange": "CBOT"},
     "ETHEREUM": {"code": "ER", "cycle": "FGHJKMNQUVXZ", "exchange": "CME"},
+    "ETHER-micro": {"code": "TA", "cycle": "FGHJKMNQUVXZ", "exchange": "CME"},  # Add 3
     "EUA": {
         "code": "CK",
         "cycle": "FGHJKMNQUVXZ",
