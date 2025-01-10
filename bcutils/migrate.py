@@ -69,7 +69,7 @@ def delete(full_path, dry_run=False, reason="Dunno"):
 
 if __name__ == "__main__":
     migrate_to_multi_freq(
-        "/home/user/prices/barchart",
-        ["SEK"],
-        dry_run=True,
+        "/Users/nanthawat/PycharmProjects/bc-utils/data",
+        ["CORN_mini"],
+        dry_run=False,
     )
