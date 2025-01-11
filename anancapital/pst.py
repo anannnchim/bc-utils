@@ -42,5 +42,5 @@ def load_config(config_path):
 
 
 if __name__ == "__main__":
-    download_with_config()
-    # update_with_config()
+    # download_with_config()
+    update_with_config()
