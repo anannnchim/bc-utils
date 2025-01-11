@@ -10,4 +10,13 @@ Use for setting up config
 - store csv data locally on my mac.
 
 4. AnanCapitalFund: `src/data/parquet/futures_contract_prices`
-- store parquet file in repo. 
+- store parquet file in repo.
+
+# Note
+
+1. Make sure to download when market close, Sunday or Saturday
+- Since it might contain un-complete data if not doing so.
+
+2. Update function is not working for hour data but works for day.
+
+3. Data is UTC format and contain full sessions.
