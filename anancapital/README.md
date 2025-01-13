@@ -20,3 +20,7 @@ Use for setting up config
 2. Update function is not working for hour data but works for day.
 
 3. Data is UTC format and contain full sessions.
+
+4. Download function will not touch the pre-existed contract.
+
+5. Update function is not wokring for HOUR data. 
