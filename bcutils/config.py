@@ -59,6 +59,7 @@ CONTRACT_MAP = {
         "exchange": "ENDEX",
     },
     "EUR": {"code": "E6", "cycle": "FGHJKMNQUVXZ", "exchange": "CME"},
+    "EUR_micro": {"code": "MF", "cycle": "HMUZ", "exchange": "CME"}, # Add 4
     "EURAUD": {"code": "UC", "cycle": "HMUZ", "exchange": "CME"},
     "EURCAD": {"code": "EP", "cycle": "HMUZ", "exchange": "ICE/US"},
     "EURCHF": {"code": "RF", "cycle": "HMUZ", "exchange": "CME"},
