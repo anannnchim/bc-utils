@@ -22,6 +22,7 @@ CONTRACT_MAP = {
     "BUXL": {"code": "GX", "cycle": "HMUZ", "exchange": "EUREX"},
     "CAC": {"code": "MX", "cycle": "FGHJKMNQUVXZ", "exchange": "EuronextInd"},
     "CAD": {"code": "D6", "cycle": "HMUZ", "exchange": "CME"},
+    "CAD2": {"code": "CH", "cycle": "HMUZ", "exchange": "TMX"}, # Add 5
     "CADJPY": {"code": "UF", "cycle": "HMUZ", "exchange": "CME"},
     "CAD10": {"code": "CG", "cycle": "HMUZ", "exchange": "TMX"},
     "CANOLA": {"code": "RS", "cycle": "FHKNX", "exchange": "ICE/CA"},
@@ -43,6 +44,7 @@ CONTRACT_MAP = {
     "COTTON2": {"code": "CT", "cycle": "HKNVZ", "exchange": "ICE/US"},
     "CRUDE_ICE": {"code": "WI", "cycle": "FGHJKMNQUVXZ", "exchange": "ICE/EU/Com"},
     "CRUDE_W": {"code": "CL", "cycle": "FGHJKMNQUVXZ", "exchange": "NYMEX"},
+    "CRUDE_W_micro": {"code": "CY", "cycle": "FGHJKMNQUVXZ", "exchange": "NYMEX"}, # Add 6
     "CZK": {"code": "WC", "cycle": "HMUZ", "exchange": "CME"},
     "DAX": {"code": "DY", "cycle": "HMUZ", "exchange": "EUREX"},
     "DIVDAX-DIVI": {"code": "AI", "cycle": "HMUZ", "exchange": "EUREX"},
