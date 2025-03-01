@@ -37,7 +37,7 @@ CONTRACT_MAP = {
     "COCOA_NY": {"code": "CC", "cycle": "HKNUZ", "exchange": "ICE/US"},
     "COFFEE": {"code": "KC", "cycle": "HKNUZ", "exchange": "ICE/US"},
     "COPPER": {"code": "HG", "cycle": "FHJMNUVZ", "exchange": "COMEX"},
-    "COPPER-micro": {"code": "QL", "cycle": "HKNUZ", "exchange": "COMEX"},
+    "COPPER-micro": {"code": "QL", "cycle": "FGHJKMNQUVXZ", "exchange": "COMEX"}, # FIX cycle: get it from PriceRollCycle rob config.
     "CORN": {"code": "ZC", "cycle": "HKNUZ", "exchange": "CBOT"},
     "CORN_mini": {"code": "XN", "cycle": "HKNUZ", "exchange": "CBOT"},  # Add 1
     "COTTON": {"code": "KG", "cycle": "HKNVZ", "exchange": "NYMEX"},
