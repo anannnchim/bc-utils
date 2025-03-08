@@ -41,3 +41,4 @@ inc/
 private_config.yaml
 update_data.log
 myenv
+.DS_Store

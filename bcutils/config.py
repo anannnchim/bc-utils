@@ -22,6 +22,7 @@ CONTRACT_MAP = {
     "BUXL": {"code": "GX", "cycle": "HMUZ", "exchange": "EUREX"},
     "CAC": {"code": "MX", "cycle": "FGHJKMNQUVXZ", "exchange": "EuronextInd"},
     "CAD": {"code": "D6", "cycle": "HMUZ", "exchange": "CME"},
+    "CAD_micro": {"code": "WK", "cycle": "HMUZ", "exchange": "CME"}, # Add 7
     "CAD2": {"code": "CH", "cycle": "HMUZ", "exchange": "TMX"}, # Add 5
     "CADJPY": {"code": "UF", "cycle": "HMUZ", "exchange": "CME"},
     "CAD10": {"code": "CG", "cycle": "HMUZ", "exchange": "TMX"},
@@ -219,6 +220,7 @@ CONTRACT_MAP = {
     "US3": {"code": "ZE", "cycle": "HMUZ", "exchange": "CBOT"},
     "V2X": {"code": "DV", "cycle": "FGHJKMNQUVXZ", "exchange": "EUREX"},
     "VIX": {"code": "VI", "cycle": "FGHJKMNQUVXZ", "exchange": "CFE"},
+    "VIX_mini": {"code": "VJ", "cycle": "FGHJKMNQUVXZ", "exchange": "CFE"}, # Add 8
     "VNKI": {"code": "Y.", "cycle": "FGHJKMNQUVXZ", "exchange": "JPX"},
     "WHEAT": {"code": "ZW", "cycle": "HKNUZ", "exchange": "CBOT"},
     "WHEAT_ICE": {"code": "LW", "cycle": "FHKNUX", "exchange": "ICE/EU/Com"},

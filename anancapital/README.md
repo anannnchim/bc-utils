@@ -24,3 +24,6 @@ Use for setting up config
 4. Download function will not touch the pre-existed contract.
 
 5. Update function is not wokring for HOUR data. 
+
+6. In `config.py`, roll is _PriceRollCycle_ from
+- https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv
