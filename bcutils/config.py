@@ -116,6 +116,7 @@ CONTRACT_MAP = {
     "GASOILINE": {"code": "RB", "cycle": "FGHJKMNQUVXZ", "exchange": "NYMEX"},
     "GAS-PEN": {"code": "HP", "cycle": "FGHJKMNQUVXZ", "exchange": "NYMEX"},
     "GBP": {"code": "B6", "cycle": "HMUZ", "exchange": "CME"},
+    "GBP_micro": {"code": "MB", "cycle": "HMUZ", "exchange": "CME"},
     "GBPCHF": {"code": "SS", "cycle": "HMUZ", "exchange": "ICE/US"},
     "GBPEUR": {"code": "RP", "cycle": "HMUZ", "exchange": "CME"},
     "GBPJPY": {"code": "UR", "cycle": "HMUZ", "exchange": "CME"},
