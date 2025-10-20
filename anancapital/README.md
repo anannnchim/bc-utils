@@ -16,6 +16,7 @@ Use for setting up config
 
 1. Make sure to download when market close, Sunday or Saturday
 - Since it might contain un-complete data if not doing so.
+- On weekday, just download old data or completed month.
 
 2. Update function is not working for hour data but works for day.
 
