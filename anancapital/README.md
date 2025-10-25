@@ -29,5 +29,6 @@ Use for setting up config
 6. In `config.py`, roll is _PriceRollCycle_ from
 - https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv
 
+7. After download all, we need move to `private/docs/event_process: Initialize new instrument data`  
 # Untrack files
 - `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
