@@ -226,6 +226,7 @@ CONTRACT_MAP = {
     "VNKI": {"code": "Y.", "cycle": "FGHJKMNQUVXZ", "exchange": "JPX"},
     "WHEAT": {"code": "ZW", "cycle": "HKNUZ", "exchange": "CBOT"},
     "WHEAT_ICE": {"code": "LW", "cycle": "FHKNUX", "exchange": "ICE/EU/Com"},
+    "WHEAT_mini": {"code": "XW", "cycle": "HKNUZ", "exchange": "CBOT"}, # ADD
     "WHEY": {"code": "DG", "cycle": "FGHJKMNQUVXZ", "exchange": "CME"},
     "YENEUR": {"code": "RY", "cycle": "HMUZ", "exchange": "CME"},
     "ZAR": {"code": "T6", "cycle": "HMUZ", "exchange": "CME"},
