@@ -39,7 +39,6 @@ inc/
 /.venv
 /temp
 /anancapital/private_config.yaml
-/anancapital/private_contract_map.py
 update_data.log
 myenv
 .DS_Store
