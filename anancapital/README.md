@@ -1,92 +1,232 @@
 # README
 
-## 1. Files
+## 1. File Structure & Tracking
 
 ---
 
-All files are tracked by github clone. 
+### Tracked by Git (default)
 
-Personal folders
+All source files from the original repository are tracked via Git.
 
-- /Users/nanthawat/PycharmProjects/bc-utils/anancapital
-- /Users/nanthawat/PycharmProjects/bc-utils/data
+### Private files (not tracked by Git)
 
-Modified files
+These files are **local-only** and must remain in `.gitignore`:
 
-1. Add/modify config for instruments
+* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
+* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_contract_map.py`
 
-- /Users/nanthawat/PycharmProjects/bc-utils/bcutils/config.py
+### Personal folders (local only)
 
+These folders are created and maintained locally:
 
-Untrakced files
+* `/Users/nanthawat/PycharmProjects/bc-utils/data`
+* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital`
 
-1. Define instrument we want to download.
+### Modified core files
 
-- /Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml
-     
+The following files differ from the original repository:
 
-## 2. How to initialize project 
+1. **Override mechanism added**
+
+   * `/Users/nanthawat/PycharmProjects/bc-utils/bcutils/config.py`
+
+2. **Extended ignore rules**
+
+   * `/Users/nanthawat/PycharmProjects/bc-utils/.gitignore`
 
 ---
-1. Clone the project by running below in terminal 
 
+## 2. Project Initialization
 
-```plantuml
+---
+
+### Step 1: Clone the original project
+
+```bash
 git clone https://github.com/bug-or-feature/bc-utils.git
 ```
 
-2. Create a personal folder called `anancapital` that copy from sample folder & create `README.md` 
+### Step 2: Create personal workspace
+
+Inside the project root, create a personal folder:
+
+```text
+anancapital/
+├── private_config.yaml
+├── private_contract_map.py
+├── pst.py
+└── README.md
 ```
-private_config.yaml
-pst.py
+
+> This folder is **not tracked by Git** and is specific to your environment.
+
+### Step 3: Configure private settings
+
+* Fill in `private_config.yaml`
+* Ensure all private files are listed in `.gitignore`
+
+---
+
+## 3. Updating the Project from Upstream
+
+---
+
+This process should be used whenever the original project adds or modifies instruments, exchanges, or logic.
+
+### Step 1: Start from a clean `main`
+
+```bash
+git checkout main
+git pull origin main
 ```
 
-3. Fill data in `private_config.yaml`. And make sure we put it in gitignore 
+### Step 2: Fetch latest upstream changes
 
-## 3. How to update projects 
+```bash
+git fetch upstream
+```
+
+> This downloads updates from the original repository **without modifying your code**.
+
+### Step 3: Create a sync branch
+
+```bash
+git checkout -b sync-upstream-YYYY-MM-DD
+```
+
+### Step 4: Merge upstream changes
+
+```bash
+git merge upstream/main
+```
+
+* Resolve conflicts if any
+* Do **not** modify private files
+
+### Step 5: Commit merged changes
+
+```bash
+git add -A
+git commit -m "Sync upstream YYYY-MM-DD"
+```
+
+### Step 6: Test overrides
+
+Verify that overrides work correctly:
+
+```bash
+python -m anancapital.print_contract_map
+```
+
+### Step 7: Run in production (recommended)
+
+* Use the sync branch for ~1 month
+* Monitor for missing instruments, roll issues, or data errors
+
+### Step 8: Merge sync branch into `main`
+
+```bash
+git checkout main
+git merge sync-upstream-YYYY-MM-DD
+git push origin main
+```
+
+### Step 9: Clean up sync branch
+
+```bash
+git branch -d sync-upstream-YYYY-MM-DD
+git push origin --delete sync-upstream-YYYY-MM-DD
+```
+
 ---
 
-pending
+## 4. Project Backup
 
-## 4. How to backup projects
-
-pending
-
-## 5. How to use projects  
 ---
 
-1. Initialize project 
+**Status:** Pending
+(Recommend periodic external drive or cloud snapshot of `/data` and `/anancapital`)
 
-2. Set config
-- In `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
-
-3. Download contract data 
-- Run `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/pst.py`
-
-4. Data will be stored in 
- -  `/Users/nanthawat/PycharmProjects/bc-utils/data`
-
-5. Convert csv contract files to parquet 
-   - Run `/Users/nanthawat/PycharmProjects/pysystemtrade/program/initialize/convert_csv_to_parquet.py`
-   - Store in `/Users/nanthawat/PycharmProjects/bc-utils`
-
-
-## 6. Note
 ---
 
-**Old version**
-1. Make sure to download when market close, Sunday or Saturday
-   - Since it might contain un-complete data if not doing so.
-   - On weekday, just download old data or completed month.
-   - Make sure to include all data, if not it will fail later. 
+## 5. How to Use the Project
 
-2. Update function is not working for hour data but works for day.
+---
 
-3. Data is UTC format and contain full sessions.
+### Step 1: Initialize
 
-4. Download function will not touch the pre-existed contract.
+Clone and configure the project as described above.
 
-5. Update function is not wokring for HOUR data. 
+### Step 2: Set configuration
 
-6. In `bcutils/config.py`, roll is _PriceRollCycle_ from
-- https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv
+Edit:
+
+* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
+
+### Step 3: Download contract data
+
+Run:
+
+```bash
+python anancapital/pst.py
+```
+
+### Step 4: Data storage
+
+Downloaded CSV files are stored in:
+
+```text
+/Users/nanthawat/PycharmProjects/bc-utils/data
+```
+
+### Step 5: Convert CSV → Parquet
+
+Run:
+
+```bash
+python /Users/nanthawat/PycharmProjects/pysystemtrade/program/initialize/convert_csv_to_parquet.py
+```
+
+Parquet files will be stored under:
+
+```text
+/Users/nanthawat/PycharmProjects/bc-utils
+```
+
+---
+
+## 6. Notes & Caveats (Version 2025)
+
+---
+
+1. **Recommended download timing**
+
+   * Download after market close (Saturday or Sunday)
+   * Weekday downloads should only target completed contracts or months
+
+2. **Incomplete data risk**
+
+   * Partial data will cause downstream failures
+   * Always verify full session coverage
+
+3. **Time format**
+
+   * All data is in **UTC**
+   * Includes full trading sessions
+
+4. **Download behavior**
+
+   * Existing contracts are never overwritten
+
+5. **Update limitations**
+
+   * Update function works for **daily data**
+   * Update function does **not** work for **hourly data**
+
+6. **Roll configuration**
+
+   * Roll logic uses `_PriceRollCycle_` from:
+
+     * [https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv](https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv)
+
+---
