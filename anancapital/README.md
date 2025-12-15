@@ -8,7 +8,7 @@ All files are tracked by github clone.
 
 Personal folders
 
-- /Users/nanthawat/PycharmProjects/bc-utils
+- /Users/nanthawat/PycharmProjects/bc-utils/anancapital
 - /Users/nanthawat/PycharmProjects/bc-utils/data
 
 Modified files
@@ -25,14 +25,34 @@ Untrakced files
 - /Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml
      
 
-## 2. How to init projects 
+## 2. How to initialize project 
 
 ---
+1. Clone the project by running below in terminal 
 
-(clone and try to reinit the project)
 
+```plantuml
+git clone https://github.com/bug-or-feature/bc-utils.git
+```
 
-## 3. How to use projects  
+2. Create a personal folder called `anancapital` that copy from sample folder & create `README.md` 
+```
+private_config.yaml
+pst.py
+```
+
+3. Fill data in `private_config.yaml`. And make sure we put it in gitignore 
+
+## 3. How to update projects 
+---
+
+pending
+
+## 4. How to backup projects
+
+pending
+
+## 5. How to use projects  
 ---
 
 1. Initialize project 
@@ -51,8 +71,10 @@ Untrakced files
    - Store in `/Users/nanthawat/PycharmProjects/bc-utils`
 
 
-## 4. Note
+## 6. Note
 ---
+
+**Old version**
 1. Make sure to download when market close, Sunday or Saturday
    - Since it might contain un-complete data if not doing so.
    - On weekday, just download old data or completed month.
