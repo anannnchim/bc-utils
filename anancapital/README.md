@@ -71,6 +71,8 @@ anancapital/
 
 ---
 
+Period: Yearly
+
 This process should be used whenever the original project adds or modifies instruments, exchanges, or logic.
 
 ### Step 1: Start from a clean `main`
@@ -143,6 +145,8 @@ git push origin --delete sync-upstream-YYYY-MM-DD
 ## 4. Project Backup
 
 ---
+
+Period: Quarterly 
 
 **Status:** Pending
 (Recommend periodic external drive or cloud snapshot of `/data` and `/anancapital`)
