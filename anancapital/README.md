@@ -1,23 +1,62 @@
 # README
 
-1. `private_config.yaml`
-Use for setting up config
+## 1. Files
 
-2. `pst`
-- use for download data once, and set to update daily
+---
 
-3. bc-utils: `data/futures/contract_prices_csv`
-- store csv data locally on my mac.
+All files are tracked by github clone. 
 
-4. AnanCapitalFund: `src/data/parquet/futures_contract_prices`
-- store parquet file in repo.
+Personal folders
 
-# Note
+- /Users/nanthawat/PycharmProjects/bc-utils
+- /Users/nanthawat/PycharmProjects/bc-utils/data
 
+Modified files
+
+1. Add/modify config for instruments
+
+- /Users/nanthawat/PycharmProjects/bc-utils/bcutils/config.py
+
+
+Untrakced files
+
+1. Define instrument we want to download.
+
+- /Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml
+     
+
+## 2. How to init projects 
+
+---
+
+(clone and try to reinit the project)
+
+
+## 3. How to use projects  
+---
+
+1. Initialize project 
+
+2. Set config
+- In `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
+
+3. Download contract data 
+- Run `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/pst.py`
+
+4. Data will be stored in 
+ -  `/Users/nanthawat/PycharmProjects/bc-utils/data`
+
+5. Convert csv contract files to parquet 
+   - Run `/Users/nanthawat/PycharmProjects/pysystemtrade/program/initialize/convert_csv_to_parquet.py`
+   - Store in `/Users/nanthawat/PycharmProjects/bc-utils`
+
+
+## 4. Note
+---
 1. Make sure to download when market close, Sunday or Saturday
-- Since it might contain un-complete data if not doing so.
-- On weekday, just download old data or completed month.
-- Make sure to include all data, if not it will fail later. 
+   - Since it might contain un-complete data if not doing so.
+   - On weekday, just download old data or completed month.
+   - Make sure to include all data, if not it will fail later. 
 
 2. Update function is not working for hour data but works for day.
 
@@ -27,9 +66,5 @@ Use for setting up config
 
 5. Update function is not wokring for HOUR data. 
 
-6. In `config.py`, roll is _PriceRollCycle_ from
+6. In `bcutils/config.py`, roll is _PriceRollCycle_ from
 - https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv
-
-7. After download all, we need move to `private/docs/event_process: Initialize new instrument data`  
-# Untrack files
-- `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
