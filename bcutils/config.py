@@ -281,3 +281,23 @@ EXCHANGES = {
     "SGX": {"tick_date": "2008-05-05", "eod_date": "1986-09-03"},
     "TMX": {"tick_date": "2010-04-05", "eod_date": "1993-04-22"},
 }
+
+# THIS IS ADDED FOR OVERRIDING
+try:
+    from anancapital.private_contract_map import (
+        CONTRACT_MAP_OVERRIDES,
+        EXCHANGES_OVERRIDES,
+        CONTRACT_MAP_REMOVALS,
+        EXCHANGES_REMOVALS,
+    )
+
+    for k in CONTRACT_MAP_REMOVALS:
+        CONTRACT_MAP.pop(k, None)
+    CONTRACT_MAP.update(CONTRACT_MAP_OVERRIDES)
+
+    for k in EXCHANGES_REMOVALS:
+        EXCHANGES.pop(k, None)
+    EXCHANGES.update(EXCHANGES_OVERRIDES)
+
+except ImportError:
+    pass
