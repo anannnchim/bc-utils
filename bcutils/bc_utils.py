@@ -1,3 +1,5 @@
+# /Users/nanthawat/PycharmProjects/bc-utils/bcutils/bc_utils.py
+
 import calendar
 import enum
 import io
@@ -20,6 +22,9 @@ import requests
 from bs4 import BeautifulSoup
 
 from bcutils.config import CONTRACT_MAP, EXCHANGES
+
+# ✅ single place to handle vendor column changes (Latest/Last -> Close, etc.)
+from anancapital.normalization import BarchartPriceNormalizer
 
 logger = logging.getLogger(__name__)
 
@@ -69,19 +74,7 @@ def create_bc_session(config_obj: dict, do_login=True):
     """
     Create and return a web session, optionally logging into Barchart with the supplied
     credentials.
-
-    Args:
-        config_obj: dict containing Barchart credentials, with keys `barchart_username`
-            and `barchart_password`
-        do_login: if True, authenticate session with Barchart credentials
-
-    Returns:
-        A requests.Session instance
-
-    Raises:
-        Exception: if credentials are invalid
     """
-
     session = requests.Session()
     session.headers.update({"User-Agent": "Mozilla/5.0"})
     if do_login is True and (
@@ -124,19 +117,7 @@ def save_prices_for_contract(
 ):
     """
     Save prices for an individual futures contract.
-
-    Args:
-        session: requests.Session instance
-        contract: Barchart style contract identifier, eg GCH24 for March 2024 Gold
-        save_path: full path where price file will be saved
-        start_date: start date
-        end_date: end date
-        dry_run: if True, provides useful diagnostic info but does not execute
-
-    Returns:
-        A HistoricalDataResult instance, representing the result of the operation
     """
-
     res = _get_resolution(save_path)
 
     try:
@@ -231,7 +212,6 @@ def save_prices_for_contract(
                 payload["type"] = "eod"
                 payload["period"] = "daily"
                 dateformat = "%Y-%m-%d"
-
             elif res == Resolution.Hour:
                 payload["type"] = "minutes"
                 payload["interval"] = 60
@@ -249,16 +229,19 @@ def save_prices_for_contract(
                     if "Error retrieving data" not in resp.text:
                         iostr = io.StringIO(resp.text)
                         df = pd.read_csv(iostr, skipfooter=1, engine="python")
+
+                        # parse + index + timezone standardisation
                         df["Time"] = pd.to_datetime(df["Time"], format=dateformat)
                         df.set_index("Time", inplace=True)
                         df.index = df.index.tz_localize(tz="US/Central").tz_convert(
                             "UTC"
                         )
-                        df = df.rename(columns={"Last": "Close"})
+
+                        # ✅ canonical schema here (Latest/Last -> Close, etc.)
+                        df = BarchartPriceNormalizer.normalize(df)
 
                         logger.info(f"writing to: {save_path}")
                         df.to_csv(save_path, date_format="%Y-%m-%dT%H:%M:%S%z")
-
                     else:
                         logger.info(
                             f"Barchart data problem for '{contract}', not writing"
@@ -290,25 +273,7 @@ def get_barchart_downloads(
     default_day_count: int = 400,
 ):
     """
-    Run a download session, performing as many contract downloads as possible, given
-    the config, parameters, existing files, and available daily allowance.
-
-    Args:
-        session: requests.Session instance
-        contract_map: dict containing instrument config
-        contract_list: optional list of Barchart contract IDs we want to download in
-            this run. If provided, `start_year` and `start_year` are ignored. If not
-            provided, a list will be created based on the parameters. See
-            `_build_contract_list()`
-        instr_list: list of instrument codes (eg GOLD, AUD) we want to download in this
-            run
-        save_dir: full path to the directory where we want downloaded files to be saved
-        start_year: start year as an int
-        end_year: end year as an int
-        dry_run: if True, provides useful diagnostic info but does not execute
-        do_daily: if True, download daily as well as hourly price files
-        pause_between_downloads: if True, wait a random short period between downloads
-        default_day_count: default number of days of data to download
+    Run a download session, performing as many contract downloads as possible.
     """
     if contract_map is None:
         contract_map = CONTRACT_MAP
@@ -380,7 +345,6 @@ def get_barchart_downloads(
                     break
                 else:
                     if pause_between_downloads:
-                        # cursory attempt to not appear like a bot
                         time.sleep(0 if dry_run else randint(7, 15))
 
         # logout
@@ -402,20 +366,6 @@ def update_barchart_downloads(
 ):
     """
     Update recent previously downloaded files for an instrument.
-
-    Considers previously downloaded contract files where the contract date is more
-    recent than `days_ago`. For each file, will update it with any new price data rows,
-    given the existing resolution.
-
-    Args:
-        instr_code: instrument code (eg GOLD)
-        contract_map: dict containing instrument config
-        save_dir: full path to the directory where previously downloaded files are
-            located
-        days_ago: how many days to look back. A file's contract date is assumed to be
-            the 1st of the month. So GCH23 would be 1st March 2023
-        dry_run: if True, provides useful diagnostic info but does not execute
-        split_freq: True if we are expecting to find split frequency files
     """
     if contract_map is None:
         contract_map = CONTRACT_MAP
@@ -484,18 +434,6 @@ def update_barchart_contract_file(
 ):
     """
     Update a previously downloaded contract price file.
-
-    Args:
-        session: requests.Session instance
-        contract_map: dict containing instrument config
-        path: full path to the directory where previously downloaded files are located
-        contract_id: Barchart style contract identifier, eg GCH24 for March 2024 Gold
-        res: Resolution.Hour or Resolution.Day
-    Raises:
-        IntegrityException: raised if a problem is encountered when trying to set the
-            datetime column as index
-        RecentUpdateException: raised if the file has been recently updated
-        EmptyDataException: raised if the update contains no data
     """
     inv_contract_map = _build_inverse_map(contract_map)
 
@@ -514,6 +452,9 @@ def update_barchart_contract_file(
         last_index_date = existing.index[-1]
     except ValueError:
         raise IntegrityException(f"Index problem with {file}, needs manual check")
+
+    # ✅ keep existing schema canonical (defensive)
+    existing = BarchartPriceNormalizer.normalize(existing)
 
     if (now - last_index_date).days < 4:
         raise RecentUpdateException(f"Skipping {file}, recently updated")
@@ -536,6 +477,9 @@ def update_barchart_contract_file(
         )
         update = update[start:]
 
+        # ✅ make sure update is canonical too
+        update = BarchartPriceNormalizer.normalize(update)
+
         try:
             final = pd.concat([existing, update], verify_integrity=True)
             output_path = f"{path}/{file}"
@@ -553,8 +497,6 @@ def get_historical_prices_for_contract(
         raise BCException("instr_code is required")
 
     try:
-        # GET the futures quote chart page, scrape to get XSRF token
-        # https://www.barchart.com/futures/quotes/GCM21/interactive-chart
         chart_url = BARCHART_URL + f"futures/quotes/{instr_code}/interactive-chart"
         chart_resp = session.get(chart_url)
         xsrf = urllib.parse.unquote(chart_resp.cookies["XSRF-TOKEN"])
@@ -584,7 +526,6 @@ def get_historical_prices_for_contract(
             data_url = BARCHART_URL + "proxies/timeseries/historical/queryminutes.ashx"
             payload["interval"] = "60"
 
-        # get prices for instrument from BC internal API
         prices_resp = session.get(data_url, headers=headers, params=payload)
         if prices_resp.status_code != 200:
             raise Exception(
@@ -598,17 +539,13 @@ def get_historical_prices_for_contract(
             f"ratelimit {ratelimit}"
         )
 
-        # read response into dataframe
         iostr = io.StringIO(prices_resp.text)
         df = pd.read_csv(iostr, header=None)
 
-        # convert to expected format
         price_data_as_df = _raw_barchart_data_to_df(df, bar_freq=resolution)
 
         if len(df) == 0:
             raise BCException(f"Zero length Barchart price data found for {instr_code}")
-
-        logger.debug(f"Latest price {df.index[-1]} with {resolution}")
 
         return price_data_as_df
 
@@ -649,7 +586,6 @@ def _build_contract_list(start_year, end_year, instr_list=None, contract_map=Non
 
     pool = cycle(contract_map.keys())
 
-    # Count how many contracts are actually available to prevent infinite loops
     available_contracts = sum(
         len(contracts_per_instrument.get(instr, [])) for instr in contract_map.keys()
     )
@@ -682,8 +618,6 @@ def _build_contract_list(start_year, end_year, instr_list=None, contract_map=Non
             if len(instr_list) > 0:
                 contract_list.append(instr_list.pop())
 
-    # return ['CTH21', 'CTK21', 'CTN21', 'CTU21', 'CTZ21', 'CTH22']
-
     logger.info(f"Contract list: {contract_list}")
     return contract_list
 
@@ -710,14 +644,6 @@ def _before_available_res(resolution, start_date, instr_config):
 
 
 def _get_overview(session, contract_id):
-    """
-    GET the futures overview page, e.g.
-        https://www.barchart.com/futures/quotes/B6M21/overview
-    :param contract_id: contract identifier
-    :type contract_id: str
-    :return: resp
-    :rtype: HTTP response object
-    """
     url = BARCHART_URL + "futures/quotes/%s/overview" % contract_id
     resp = session.get(url)
     logger.debug(f"GET {url}, response {resp.status_code}")
@@ -761,16 +687,11 @@ def _get_start_end_dates(month, year, instr_config=None, default_day_count: int 
     else:
         day_count = default_day_count
 
-    # we need to work out a date range for which we want the prices
-    # for expired contracts the end date would be the expiry date;
-    # for KISS sake, lets assume expiry is last date of contract month
     end_date = datetime(year, month, calendar.monthrange(year, month)[1])
 
-    # but, if that end_date is in the future, then we may as well make it today...
     if now.date() < end_date.date():
         end_date = now
 
-    # let's set start date at <day_count> days before end date
     day_count = timedelta(days=day_count)
     start_date = end_date - day_count
 
@@ -778,17 +699,10 @@ def _get_start_end_dates(month, year, instr_config=None, default_day_count: int 
 
 
 def _month_from_contract_letter(contract_letter):
-    """
-    Returns month number (1 is January) from contract letter
-
-    :param contract_letter:
-    :return:
-    """
     try:
         month_number = MONTH_LIST.index(contract_letter)
     except ValueError:
         return None
-
     return month_number + 1
 
 
@@ -825,7 +739,12 @@ def _raw_barchart_data_to_df(
     )
     price_data_raw.index.name = "Time"
     df = price_data_raw.drop(columns=cols_to_remove)
+
+    # Barchart raw API -> assumed order -> label it
     df.columns = ["Open", "High", "Low", "Close", "Volume"]
+
+    # ✅ canonical schema enforcement
+    df = BarchartPriceNormalizer.normalize(df)
 
     return df
 
@@ -889,10 +808,6 @@ def _env():
 def _get_exchange_for_code(session, contract_code: str):
     """
     Get the exchange for the given Barchart code
-
-    Scrapes the info page for the given contract to grab the exchange
-    :param contract_code:
-    :return: str
     """
     try:
         resp = _get_overview(session, contract_code)
