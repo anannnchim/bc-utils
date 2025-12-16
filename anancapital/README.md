@@ -34,6 +34,10 @@ The following files differ from the original repository:
 
    * `/Users/nanthawat/PycharmProjects/bc-utils/.gitignore`
 
+3. **Add Normalisation: Converting Latest to Close** 
+   * `/Users/nanthawat/PycharmProjects/bc-utils/bcutils/bc_utils.py`
+   * `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/normalization.py` (anancapital folder)
+
 ---
 
 ## 2. Project Initialization
