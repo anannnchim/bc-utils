@@ -13,7 +13,6 @@ All source files from the original repository are tracked via Git.
 These files are **local-only** and must remain in `.gitignore`:
 
 * `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
-* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_contract_map.py`
 
 ### Personal folders (local only)
 
