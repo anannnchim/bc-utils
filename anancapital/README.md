@@ -151,8 +151,7 @@ git push origin --delete sync-upstream-YYYY-MM-DD
 
 Period: Quarterly 
 
-**Status:** Pending
-(Recommend periodic external drive or cloud snapshot of `/data` and `/anancapital`)
+1. Copy file untrack file: `private_config.yaml` to SSD in `bc-utils/anancapital/private_config-2025-01-01`
 
 ---
 
