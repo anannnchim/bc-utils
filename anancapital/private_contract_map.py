@@ -21,6 +21,7 @@ CONTRACT_MAP_REMOVALS = set([
     "MSCIEMASIA", # Mismatch
     "INR", # Mismatch
     "KRWUSD", # Mismatch; change exchange from cme to sgx
+    "GASOLINE" # Need to confirm change in code in pysys.
 
 ])
 
