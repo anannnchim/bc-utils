@@ -42,3 +42,4 @@ inc/
 update_data.log
 myenv
 .DS_Store
+__pycache__/
