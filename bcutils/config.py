@@ -284,7 +284,7 @@ EXCHANGES = {
 
 # THIS IS ADDED FOR OVERRIDING
 try:
-    from anancapital.private_contract_map import (
+    from anancapital.contract_map import (
         CONTRACT_MAP_OVERRIDES,
         EXCHANGES_OVERRIDES,
         CONTRACT_MAP_REMOVALS,

@@ -52,7 +52,7 @@ Inside the project root, create a personal folder:
 ```text
 anancapital/
 ├── private_config.yaml
-├── private_contract_map.py
+├── contract_map.py
 ├── pst.py
 └── README.md
 ```

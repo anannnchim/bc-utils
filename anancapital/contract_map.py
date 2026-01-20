@@ -1,5 +1,3 @@
-# /Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_contract_map.py
-
 CONTRACT_MAP_OVERRIDES = {
     "AUD_micro": {"code": "MG", "cycle": "HMUZ", "exchange": "CME"},
     "CAD_micro": {"code": "WK", "cycle": "HMUZ", "exchange": "CME"},
