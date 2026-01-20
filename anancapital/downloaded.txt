@@ -1,0 +1,119 @@
+1. Need more data ---------------
+
+#   - MILK # 1996/04 - 2024
+#   - STEEL # 2008/12 - 2024
+#   - YENEUR # 1999/03 - 2024
+#  - GBPEUR # 1999/03 - 2024
+#  - BOBL # 1992/06 - 2024
+#   - EU-OIL # 2018/06 - 2024
+#   - MSCISING # 2001/10 - 2024
+#   - NIKKEI # 1991/03 - 2024
+#   - ALUMINIUM # 2014/07 - 2024
+#   - EURCHF # 1999/03 - 2024
+#  - BUND # 1992/03 - 2024
+#   - FEEDCOW # 1979/04 -2024
+#   - SOYOIL # 1979/05 - 2024
+#  - SONIA3 # 2018/12 - 2024
+#   - COFFEE # 1979/09 - 2024
+#   - COCOA_NY # 1979/09 -2024
+# - BITCOIN #(2021/08) - 2024
+# - FTSETAIWAN #(2020/11) - 2024
+
+
+2. Pending list -----------------------
+
+## Eqyity
+# - HANGENT_mini
+# - IBEX_mini
+# - HANGENT_mini
+# - KOSPI_mini
+# - KOSDAQ
+# - FTSECHINAH
+# - EURO600
+# - EU-BASIC
+
+## FX
+# - DX
+# - CNH
+# - SEK
+# - JPY
+# - CHF
+
+## Bond
+# - SOFR
+# - BTP
+# - US10U
+# - KR10
+
+##  OilGas/ Oil / Brent
+#   - BRENT-LAST
+#   - BRENT
+
+## Ags
+# - HEATOIL
+# - REDWHEAT
+
+# Products
+#   - EUA
+#   - GASOLINE form GASOIL
+
+# Pending ---------------
+# - BUXL
+# - CAC
+
+# 3. The rest: https://github.com/robcarver17/reports/blob/master/Instrument_risk_report -----------------------
+
+4. Finish downloading since 1990 -----------------------
+
+#  - EUR_micro # 2009/06 to 2025 (2027)
+#  - V2X # 2015/12 to 2025 (2027)
+#  - MUMMY # 2018 to 2025 (2027)
+#  - CAD2 #  2021/03 to 2025/12 (2027)
+#  - BBCOMM # 2011/09 to 2026 (2027)
+#  - CRUDE_W_micro # 2021/10 to 2026 (2027)
+#  - ETHER-micro # 2021/12 (2027)
+#  - CORN # 1990/03 to 2026/12 (2027)
+#  - CORN_mini # 2003/07 to 2026/12 (2027) <<<<
+#  - MILLWHEAT # 2003/03 to 2026/12 (2027)
+#  - COPPER-micro # 2022/07 to 2026/12 (2027)
+#  - CANOLA # 1990/01 to 2026/11 (2027)
+#  - CAD_micro # 2011 - (2027)
+#  - VIX_mini # 2020-2027 (2027)
+#  - IRON # 2014/02 - 2025/12
+#  - US10 # 1990/03 - 2025/09
+#  - CAD10 # 1994/06 - 2026/03
+#  - RUSSELL # 2001/09 - 2023/12
+#  - KRWUSD_mini # 2021/04 - 2025/12
+#  - AUD_micro # 2009/06 - 2025/12
+#  - GBP_micro # 2009/06 - 2025/12
+#  - EU-BANKS # 2005/06 - 2025/12
+#  - GAS_US_mini # 2002/08 to 2025/12
+#  - MXP # 1995/06 - 2025/12
+#  - JGB-SGX-mini # 1993/12 - 2025/12
+#  - FTSECHINAA # 2011/03-2025/12
+#  - GOLD_micro # 2010/12-2025/12
+#  - SOYBEAN_mini # 2003/07 - 2025/11
+#  - WHEAT_mini # 2003/07- 2026/07
+#  - SILVER # 1979/05 - 2026/12
+#  - LEANHOG # 1999/02 -  2026/12
+#  - NASDAQ_micro # 2019/06 - 2026/12
+# - RICE # 1987/03 - 2026/11
+# - LIVECOW # 1980/02 - 2026/12
+#   - BRE # 1996/01 - 2026/12
+#   - OAT # 2012/06 - 2026/06
+#  - PLAT # 1980/01 - 2026/10
+#  - US5 # 1988/09 2026/12
+#  - SOYMEAL # 1980/01 - 2026/12
+#  - ZAR # 1997/09-2026/12
+#  - NZD # 1997/09 - 2026/12
+#  - US2 # 1990/09 - 2026/03
+#   - SP500_micro # 2019/06 - 2026/12
+#   - US3 # 2020/09 - 2026/06
+#   - RUBBER # 2007/03 - 2026/11
+#   - LUMBER-new # 2022/11 - 2026/11
+#   - OATIES # 1979/05 - 2026/12
+#   - BTP3 # 2011/09 - 2026/06
+#   - TOPIX # 2010/06 - 2026/06
+#   - DAX # 1992/03 - 2026/09
+#   - DOW # 2002/06 - 2026/09
+

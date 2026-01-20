@@ -1,45 +1,41 @@
 # README
 
-## 1. File Structure & Tracking
+## 1. Understand Files and foldes 
 
 ---
 
-### Tracked by Git (default)
+**Personal vs Upstream**
 
-All source files from the original repository are tracked via Git.
+Personal folder 
 
-### Private files (not tracked by Git)
+- `/anancapital`
 
-These files are **local-only** and must remain in `.gitignore`:
+**Untracked files and folders** 
 
-* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
+Untracked file
 
-### Personal folders (local only)
+- `anancapita/private_config.yaml`
 
-These folders are created and maintained locally:
 
-* `/Users/nanthawat/PycharmProjects/bc-utils/data`
-* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital`
+## 2. Modified core files
 
-### Modified core files
+---
 
 The following files differ from the original repository:
 
 1. **Override mechanism added**
 
-   * `/Users/nanthawat/PycharmProjects/bc-utils/bcutils/config.py`
+   * `bc-utils/bcutils/config.py`
 
-2. **Extended ignore rules**
+2. **Append .gitignore**
 
-   * `/Users/nanthawat/PycharmProjects/bc-utils/.gitignore`
+   * `bc-utils/.gitignore`
 
 3. **Add Normalisation: Converting Latest to Close** 
-   * `/Users/nanthawat/PycharmProjects/bc-utils/bcutils/bc_utils.py`
-   * `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/normalization.py` (anancapital folder)
+   * `bcutils/bc_utils.py`
+   * `anancapital/normalization.py`
 
----
-
-## 2. Project Initialization
+## 3. Project Initialization
 
 ---
 
@@ -61,16 +57,13 @@ anancapital/
 └── README.md
 ```
 
-> This folder is **not tracked by Git** and is specific to your environment.
-
 ### Step 3: Configure private settings
 
 * Fill in `private_config.yaml`
 * Ensure all private files are listed in `.gitignore`
 
----
 
-## 3. Updating the Project from Upstream
+## 4. Updating from Upstream
 
 ---
 
@@ -143,9 +136,7 @@ git branch -d sync-upstream-YYYY-MM-DD
 git push origin --delete sync-upstream-YYYY-MM-DD
 ```
 
----
-
-## 4. Project Backup
+## 5. Project Backup
 
 ---
 
@@ -153,9 +144,8 @@ Period: Quarterly
 
 1. Copy file untrack file: `private_config.yaml` to SSD in `bc-utils/anancapital/private_config-2025-01-01`
 
----
 
-## 5. How to Use the Project
+## 6. How to Use the Project
 
 ---
 
@@ -165,9 +155,7 @@ Clone and configure the project as described above.
 
 ### Step 2: Set configuration
 
-Edit:
-
-* `/Users/nanthawat/PycharmProjects/bc-utils/anancapital/private_config.yaml`
+Edit `anancapital/private_config.yaml`
 
 ### Step 3: Download contract data
 
@@ -182,7 +170,7 @@ python anancapital/pst.py
 Downloaded CSV files are stored in:
 
 ```text
-/Users/nanthawat/PycharmProjects/bc-utils/data
+bc-utils/data
 ```
 
 ### Step 5: Convert CSV → Parquet
@@ -190,16 +178,15 @@ Downloaded CSV files are stored in:
 Run:
 
 ```bash
-python /Users/nanthawat/PycharmProjects/pysystemtrade/program/initialize/convert_csv_to_parquet.py
+python pysystemtrade/program/initialize/convert_csv_to_parquet.py
 ```
 
 Parquet files will be stored under:
 
 ```text
-/Users/nanthawat/PycharmProjects/bc-utils
+private-pysystemtrade/parquet
 ```
 
----
 
 ## 6. Notes & Caveats (Version 2025)
 
