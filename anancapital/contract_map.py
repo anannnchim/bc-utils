@@ -8,6 +8,7 @@ CONTRACT_MAP_OVERRIDES = {
     "KRWUSD_mini": {"code": "K9", "cycle": "FGHJKMNQUVXZ", "exchange": "SGX"},
     "VIX_mini": {"code": "VJ", "cycle": "FGHJKMNQUVXZ", "exchange": "CFE"},
     "WHEAT_mini": {"code": "XW", "cycle": "HKNUZ", "exchange": "CBOT"},
+    "S50-TFEX": {"code": "TE", "cycle": "HMUZ", "exchange": "TFEX"},
 
 }
 
