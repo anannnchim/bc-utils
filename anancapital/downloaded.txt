@@ -1,7 +1,10 @@
+# READY FOR CONVERTING (need to recheck)
+  - FED # 1988 - 2027 (Error)
+  - EURIBOR # 1990 - 2027 (Error)
+
+
 1. Need more data (Waiting for recent data) ---------------
   - BITCOIN #(2021/08) - 2024
-
-
 #   - STEEL # 2008/12 - 2024
 #   - EU-OIL # 2018/06 - 2024
 #   - MSCISING # 2001/10 - 2024
@@ -118,6 +121,6 @@
 #  - WHEAT  # 1979/05 - 2027/07
 #  - GBPEUR # 1999/03 - 2026/12
 #  - IG # 2021/07 - 2026/09
-  - FED # 1988 - 2027
-  - EURIBOR # 1990 - 2027
+
+
 
