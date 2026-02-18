@@ -1,9 +1,6 @@
 1. Need more data (Waiting for recent data) ---------------
-# - BITCOIN #(2021/08) - 2024
-# - FED # 1988/11 - 2024
-#   - MILK # 1996/04 - 2024
-#   - YENEUR # 1999/03 - 2024
-#  - BOBL # 1992/06 - 2024
+  - BITCOIN #(2021/08) - 2024
+
 
 #   - STEEL # 2008/12 - 2024
 #   - EU-OIL # 2018/06 - 2024
