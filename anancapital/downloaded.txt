@@ -1,6 +1,6 @@
 # READY FOR CONVERTING (need to recheck)
   - FED # 1988 - 2027 (Error)
-  - EURIBOR # 1990 - 2027 (Error)
+  - EURIBOR # 1990 - 2027 (Error) and go further
 
 # Get older data to 2030
   - MILK # 1996/04 - 2027

@@ -21,8 +21,14 @@ from pathlib import Path
 from typing import List, Tuple
 
 
-DATA_DIR = Path("/Users/nanthawat/PycharmProjects/bc-utils/data")
+# --------------------------------------------------
+# Resolve project root dynamically
+# --------------------------------------------------
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = PROJECT_ROOT / "data"
 PREFIXES = ("Day_", "Hour_")
+
 ENCODINGS_TO_TRY = ("utf-8", "latin-1")
 
 
