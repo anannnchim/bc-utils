@@ -13,7 +13,7 @@ CONTRACT_MAP_OVERRIDES = {
 }
 
 EXCHANGES_OVERRIDES = {
-    # e.g. "TMX": {"tick_date": "2010-04-05", "eod_date": "1993-04-22"},
+    "TFEX": {"tick_date": "2007-08-24", "eod_date": "2007-08-24"},
 }
 
 CONTRACT_MAP_REMOVALS = set([

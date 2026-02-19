@@ -2,6 +2,10 @@
   - FED # 1988 - 2027 (Error)
   - EURIBOR # 1990 - 2027 (Error)
 
+# Get older data to 2030
+  - MILK # 1996/04 - 2027
+  - YENEUR # 1999/03 - 2027
+  - BOBL # 1992/06 - 2027
 
 1. Need more data (Waiting for recent data) ---------------
   - BITCOIN #(2021/08) - 2024
