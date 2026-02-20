@@ -127,4 +127,5 @@
 #  - IG # 2021/07 - 2026/09
 
 
-
+4. Download but not converting to parquet-----------------------
+  - EURIBOR # Some error
