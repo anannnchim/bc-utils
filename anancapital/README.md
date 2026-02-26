@@ -223,3 +223,14 @@ private-pysystemtrade/parquet
      * [https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv](https://github.com/robcarver17/pysystemtrade/blob/develop/data/futures/csvconfig/rollconfig.csv)
 
 ---
+
+
+
+# Log
+
+## 2025
+1. Convert Latest to Close
+- Our downstream assumes the price to contain Close instead of Latest but barchart recently changed data from Close to Latest. So I created a normalized program to convert them.
+
+2. Add private contract map
+- Since instrument contract maps are something that change over time. So we create a private config to override them. So there will be no conflict in the future. 
