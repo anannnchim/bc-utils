@@ -43,3 +43,5 @@ update_data.log
 myenv
 .DS_Store
 __pycache__/
+/anancapital/tfex/tfex_private_config.yaml
+/anancapital/tfex
