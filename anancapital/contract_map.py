@@ -9,6 +9,7 @@ CONTRACT_MAP_OVERRIDES = {
     "VIX_mini": {"code": "VJ", "cycle": "FGHJKMNQUVXZ", "exchange": "CFE"},
     "WHEAT_mini": {"code": "XW", "cycle": "HKNUZ", "exchange": "CBOT"},
     "S50-TFEX": {"code": "TE", "cycle": "HMUZ", "exchange": "TFEX"},
+    "GF10-TFEX": {"code": "U1", "cycle": "GJMQVZ", "exchange": "TFEX"},
 
 }
 
