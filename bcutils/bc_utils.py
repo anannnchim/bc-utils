@@ -456,7 +456,7 @@ def update_barchart_contract_file(
     # ✅ keep existing schema canonical (defensive)
     existing = BarchartPriceNormalizer.normalize(existing)
 
-    if (now - last_index_date).days < 4:
+    if (now - last_index_date).days < 1:
         raise RecentUpdateException(f"Skipping {file}, recently updated")
 
     logger.info(

@@ -35,6 +35,9 @@ The following files differ from the original repository:
    * `bcutils/bc_utils.py`
    * `anancapital/normalization.py`
 
+4. **Change Update day check: from 4 to 1**
+   * `bcutils/bc_utils.py`
+
 ## 3. Project Initialization
 
 ---
