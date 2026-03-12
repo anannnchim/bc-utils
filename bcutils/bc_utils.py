@@ -468,7 +468,7 @@ def update_barchart_contract_file(
     if res == Resolution.Hour:
         start = last_index_date + timedelta(hours=1)
     else:
-        start = last_index_date + timedelta(hours=25)
+        start = last_index_date + timedelta(days=1) # FIX change from hours=25
 
     if update is not None:
         logger.info(

@@ -35,8 +35,10 @@ The following files differ from the original repository:
    * `bcutils/bc_utils.py`
    * `anancapital/normalization.py`
 
-4. **Change Update day check: from 4 to 1**
+4. ****
    * `bcutils/bc_utils.py`
+   * Change Update day check: from 4 to 1: `if (now - last_index_date).days < 1:`
+   * Change logic date: `start = last_index_date + timedelta(days=1)`
 
 ## 3. Project Initialization
 
