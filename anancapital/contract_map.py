@@ -10,6 +10,7 @@ CONTRACT_MAP_OVERRIDES = {
     "WHEAT_mini": {"code": "XW", "cycle": "HKNUZ", "exchange": "CBOT"},
     "S50-TFEX": {"code": "TE", "cycle": "HMUZ", "exchange": "TFEX"},
     "GF10-TFEX": {"code": "U1", "cycle": "GJMQVZ", "exchange": "TFEX"},
+    "CNH": {"code": "I$", "cycle": "FGHJKMNQUVXZ", "exchange": "ICE/SG"},
 
 }
 
