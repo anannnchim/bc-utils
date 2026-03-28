@@ -1,11 +1,4 @@
-# READY FOR CONVERTING (need to recheck)
-  - FED # 1988 - 2027 (Error)
-  - EURIBOR # 1990 - 2027 (Error) and go further
 
-# Get older data to 2030
-  - MILK # 1996/04 - 2027
-  - YENEUR # 1999/03 - 2027
-  - BOBL # 1992/06 - 2027
 
 1. Need more data (Waiting for recent data) ---------------
   - BITCOIN #(2021/08) - 2024
@@ -125,10 +118,12 @@
 #  - GBPEUR # 1999/03 - 2026/12
 #  - IG # 2021/07 - 2026/09
 #   - CNH # 2022 - 2027
+#  - FED # 1988 - 2027
 
 
 
 # TFEX
+
 - S50-TFEX 2008 - 2027
 - GF10-TFEX 2014 - 2027
 
