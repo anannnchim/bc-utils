@@ -1,29 +1,27 @@
+# *** No liquidity *** (Do not import)
+#   - STEEL # 2008/12 - 2024
 
+# *** Too Risky (Risk per cont > 10,000)
+#   - ALUMINIUM # 2014/07 - 2024
+#   - FEEDCOW # 1979/04 -2024
+#   - COFFEE # 1979/09 - 2024
+#   - COCOA_NY # 1979/09 -2024
 
 1. Need more data (Waiting for recent data) ---------------
   - BITCOIN #(2021/08) - 2024
-#   - STEEL # 2008/12 - 2024
-#   - EU-OIL # 2018/06 - 2024
 #   - MSCISING # 2001/10 - 2024
 #   - NIKKEI # 1991/03 - 2024
-#   - ALUMINIUM # 2014/07 - 2024
 #   - EURCHF # 1999/03 - 2024
 #  - BUND # 1992/03 - 2024
-#   - FEEDCOW # 1979/04 -2024
-#   - SOYOIL # 1979/05 - 2024
-#  - SONIA3 # 2018/12 - 2024
-#   - COFFEE # 1979/09 - 2024
-#   - COCOA_NY # 1979/09 -2024
 
 
 2. Pending list -----------------------
 
 ## Eqyity
-# - HANGENT_mini
-# - IBEX_mini
-# - HANGENT_mini
 # - KOSPI_mini
 # - KOSDAQ
+# - HANGENT_mini
+# - IBEX_mini
 # - FTSECHINAH
 # - EURO600
 # - EU-BASIC
