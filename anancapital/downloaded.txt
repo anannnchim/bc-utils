@@ -116,17 +116,12 @@
 #  - BOBL # 1992/06 - 2027
 #   - SOYOIL # 1979/05 - 2027
 #   - SONIA3 # 2018/12 - 2027
+#  - YENEUR # 1999/03 - 2027
 
 # Ready for imit
 
-#  - MILK # 1996/04 - 2027
-#  - YENEUR # 1999/03 - 2027
 
-
-
-
-
-# Need to cont download (2024-2027
+# Need to cont download (2024-2027)
 #  - BITCOIN #(2021/08) - 2027
 #   - MSCISING # 2001/10 - 2027
 #   - NIKKEI # 1991/03 - 2027
