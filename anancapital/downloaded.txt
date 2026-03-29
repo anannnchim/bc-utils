@@ -8,11 +8,6 @@
 #   - COCOA_NY # 1979/09 -2024
 
 1. Need more data (Waiting for recent data) ---------------
-  - BITCOIN #(2021/08) - 2024
-#   - MSCISING # 2001/10 - 2024
-#   - NIKKEI # 1991/03 - 2024
-#   - EURCHF # 1999/03 - 2024
-#  - BUND # 1992/03 - 2024
 
 
 2. Pending list -----------------------
@@ -118,9 +113,25 @@
 #   - CNH # 2022 - 2027
 #  - FED # 1988 - 2027
 
+
+# Ready for imit
+#   - EU-OIL # 2018/06 - 2027
 #  - MILK # 1996/04 - 2027
 #  - YENEUR # 1999/03 - 2027
 #  - BOBL # 1992/06 - 2027
+
+
+# Problem
+#   - SOYOIL # 1979/05 - 2027
+#   - SONIA3 # 2018/12 - 2027
+
+
+# Need to cont download
+#  - BITCOIN #(2021/08) - 2027
+#   - MSCISING # 2001/10 - 2027
+#   - NIKKEI # 1991/03 - 2027
+#   - EURCHF # 1999/03 - 2027
+#  - BUND # 1992/03 - 2027
 
 # TFEX
 
