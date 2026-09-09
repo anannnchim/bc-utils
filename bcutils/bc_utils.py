@@ -88,6 +88,21 @@ def create_bc_session(config_obj: dict, do_login=True):
         soup = BeautifulSoup(resp.text, "html.parser")
         tag = soup.find(type="hidden")
         csrf_token = tag.attrs["value"]
+
+        # resp = session.get(BARCHART_URL + "login", timeout=30)
+        # resp.raise_for_status()
+        #
+        # soup = BeautifulSoup(resp.text, "html.parser")
+        # tag = soup.find("input", {"name": "_token"})
+        #
+        # if tag is None or not tag.get("value"):
+        #     raise BCException(
+        #         f"Barchart login page returned no CSRF token: "
+        #         f"status={resp.status_code}, url={resp.url}"
+        #     )
+        #
+        # csrf_token = tag["value"]
+
         logger.info(
             f"GET {BARCHART_URL + 'login'}, status: {resp.status_code}, "
             f"CSRF token: {csrf_token}"
