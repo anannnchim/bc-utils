@@ -1,4 +1,7 @@
+import asyncio
 import os
+from unittest.mock import AsyncMock
+
 import pytest
 
 from bcutils.bc_utils import (
@@ -11,6 +14,7 @@ from bcutils.bc_utils import (
     _get_contract_month_year,
     _get_start_end_dates,
     _get_exchange_for_code,
+    _save_download_and_cleanup,
 )
 
 
@@ -32,6 +36,15 @@ def bc_config():
 
 
 class TestDownloader:
+    def test_saved_download_removes_browser_temp_file(self, tmp_path):
+        download = AsyncMock()
+        save_path = str(tmp_path / "Day_JPY_20261200.csv")
+
+        asyncio.run(_save_download_and_cleanup(download, save_path))
+
+        download.save_as.assert_awaited_once_with(save_path)
+        download.delete.assert_awaited_once_with()
+
     def test_no_credentials(self, download_dir):
         with pytest.raises(Exception):
             get_barchart_downloads(

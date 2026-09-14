@@ -279,6 +279,17 @@ def _normalize_downloaded_csv(save_path: str, res: Resolution) -> int:
     return len(df)
 
 
+async def _save_download_and_cleanup(download, save_path: str) -> None:
+    """Copy a browser download to its final path and remove the raw temp file."""
+    try:
+        await download.save_as(save_path)
+    finally:
+        try:
+            await download.delete()
+        except Exception as exc:  # skipcq broad by design
+            logger.warning(f"Unable to remove temporary browser download: {exc}")
+
+
 async def _save_prices_for_contract_async(
     human: Humanization,
     contract: str,
@@ -411,7 +422,7 @@ async def _save_prices_for_contract_async(
             return HistoricalDataResult.OK
 
         logger.info(f"step: saving download to {save_path}")
-        await download.save_as(save_path)
+        await _save_download_and_cleanup(download, save_path)
         row_count = _normalize_downloaded_csv(save_path, res)
         if row_count < 30:
             os.remove(save_path)
