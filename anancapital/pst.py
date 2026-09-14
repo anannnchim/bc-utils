@@ -32,8 +32,14 @@ def update_with_config():
     instr_list = config["barchart_update_list"]
     save_dir = config["barchart_path"]
     dry_run = config["barchart_dry_run"]
+    session = create_bc_session(config)
     for code in instr_list:
-        update_barchart_downloads(instr_code=code, save_dir=save_dir, dry_run=dry_run)
+        update_barchart_downloads(
+            instr_code=code,
+            save_dir=save_dir,
+            dry_run=dry_run,
+            session=session,
+        )
 
 
 def load_config(config_path):

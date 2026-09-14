@@ -37,6 +37,11 @@ inc/
 /.idea
 /.env
 /.venv
+/data
+auth.json
+/downloads
+humanization.log
+/.claude
 /temp
 /anancapital/private_config.yaml
 update_data.log
