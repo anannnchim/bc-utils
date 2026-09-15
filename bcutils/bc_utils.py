@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from itertools import cycle
 from pathlib import Path
 from random import randint
+from urllib.parse import parse_qs, urlparse
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -877,10 +878,19 @@ async def _update_barchart_contract_file_async(
         update = update[start:]
         update = BarchartPriceNormalizer.normalize(update)
 
+        if update.empty:
+            logger.info(f"No new rows for {contract_id}")
+            return
+
         try:
-            final = pd.concat([existing, update], verify_integrity=True)
+            pd.concat([existing, update], verify_integrity=True)
             output_path = f"{path}/{file}"
-            final.to_csv(output_path, date_format="%Y-%m-%dT%H:%M:%S%z")
+            update.to_csv(
+                output_path,
+                mode="a",
+                header=False,
+                date_format="%Y-%m-%dT%H:%M:%S%z",
+            )
         except Exception as ex:
             logger.warning(f"Problem with {file}: {ex}")
     else:
@@ -947,7 +957,7 @@ def update_barchart_contract_file(
     )
 
 
-def _historical_prices_predicate(resolution: Resolution):
+def _historical_prices_predicate(resolution: Resolution, contract_id: str):
     # build a page.expect_response() predicate
     if resolution == Resolution.Day:
         url_prefix = BARCHART_URL + "proxies/timeseries/historical/queryeod.ashx"
@@ -957,10 +967,13 @@ def _historical_prices_predicate(resolution: Resolution):
         required = ("volume=contract", "interval=60")
 
     def predicate(response) -> bool:
+        request_url = response.request.url
+        response_symbols = parse_qs(urlparse(request_url).query).get("symbol", [])
         return (
             response.request.method == "GET"
-            and response.request.url.startswith(url_prefix)
-            and all(token in response.request.url for token in required)
+            and request_url.startswith(url_prefix)
+            and all(token in request_url for token in required)
+            and response_symbols == [contract_id]
         )
 
     return predicate
@@ -975,7 +988,7 @@ async def _get_historical_prices_for_contract_async(
     try:
         chart_url = f"{BARCHART_URL}futures/quotes/{contract_id}/interactive-chart"
         resolution_label = "Daily" if resolution == Resolution.Day else "1 Hour"
-        predicate = _historical_prices_predicate(resolution)
+        predicate = _historical_prices_predicate(resolution, contract_id)
 
         logger.info(f"step: goto interactive-chart page for {contract_id}")
         async with human.page.expect_response(
@@ -1017,6 +1030,19 @@ async def _get_historical_prices_for_contract_async(
         if len(df) == 0:
             raise BCException(
                 f"Zero length Barchart price data found for {contract_id}"
+            )
+
+        contract_month, contract_year = _get_contract_month_year(contract_id)
+        contract_month_end = datetime(
+            contract_year,
+            contract_month,
+            calendar.monthrange(contract_year, contract_month)[1],
+        ).date()
+        latest_price_date = price_data_as_df.index.max().date()
+        if latest_price_date > contract_month_end:
+            raise BCException(
+                f"Barchart returned data through {latest_price_date} for "
+                f"{contract_id}, after contract month ended {contract_month_end}"
             )
 
         logger.debug(f"Latest price {df.index[-1]} with {resolution}")

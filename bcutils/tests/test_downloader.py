@@ -1,7 +1,9 @@
 import asyncio
 import os
+from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
+import pandas as pd
 import pytest
 
 from bcutils.bc_utils import (
@@ -14,7 +16,9 @@ from bcutils.bc_utils import (
     _get_contract_month_year,
     _get_start_end_dates,
     _get_exchange_for_code,
+    _historical_prices_predicate,
     _save_download_and_cleanup,
+    _update_barchart_contract_file_async,
 )
 
 
@@ -36,6 +40,83 @@ def bc_config():
 
 
 class TestDownloader:
+    def test_contract_update_appends_without_rewriting_existing_rows(
+        self, monkeypatch, tmp_path
+    ):
+        csv_path = tmp_path / "Day_S50-TFEX_20200900.csv"
+        original = (
+            "Time,Open,High,Low,Close,Volume\n"
+            "2020-09-10T05:00:00+0000,1000,1010,990,1005,100\n"
+            "2020-09-11T05:00:00+0000,1005,1015,995,1010,110\n"
+        )
+        csv_path.write_text(original)
+        update = pd.DataFrame(
+            {
+                "Open": [1005.0, 1010.0, 1015.0],
+                "High": [1015.0, 1020.0, 1025.0],
+                "Low": [995.0, 1000.0, 1005.0],
+                "Close": [1010.0, 1015.0, 1020.0],
+                "Volume": [110, 120, 130],
+            },
+            index=pd.to_datetime(
+                [
+                    "2020-09-11T05:00:00+00:00",
+                    "2020-09-12T05:00:00+00:00",
+                    "2020-09-13T05:00:00+00:00",
+                ]
+            ),
+        )
+        update.index.name = "Time"
+        fetch = AsyncMock(return_value=update)
+        monkeypatch.setattr(
+            "bcutils.bc_utils._get_historical_prices_for_contract_async", fetch
+        )
+
+        asyncio.run(
+            _update_barchart_contract_file_async(
+                human=None,
+                contract_map={
+                    "S50-TFEX": {
+                        "code": "TE",
+                        "cycle": "HMUZ",
+                        "exchange": "TFEX",
+                    }
+                },
+                path=str(tmp_path),
+                contract_id="TEU20",
+                res=Resolution.Day,
+            )
+        )
+
+        result = csv_path.read_text()
+        assert result.startswith(original)
+        assert len(result.splitlines()) == 5
+
+    def test_historical_response_must_match_requested_contract(self):
+        predicate = _historical_prices_predicate(Resolution.Day, "TEH26")
+
+        matching_response = SimpleNamespace(
+            request=SimpleNamespace(
+                method="GET",
+                url=(
+                    "https://www.barchart.com/proxies/timeseries/historical/"
+                    "queryeod.ashx?symbol=TEH26&data=daily&volume=contract"
+                ),
+            )
+        )
+        stale_response = SimpleNamespace(
+            request=SimpleNamespace(
+                method="GET",
+                url=(
+                    "https://www.barchart.com/proxies/timeseries/historical/"
+                    "queryeod.ashx?symbol=U1Z25&data=daily&volume=contract"
+                ),
+            )
+        )
+
+        assert predicate(matching_response)
+        assert not predicate(stale_response)
+
     def test_saved_download_removes_browser_temp_file(self, tmp_path):
         download = AsyncMock()
         save_path = str(tmp_path / "Day_JPY_20261200.csv")
