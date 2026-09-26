@@ -5,6 +5,7 @@ from unittest.mock import AsyncMock
 
 import pandas as pd
 import pytest
+from patchright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from bcutils.bc_utils import (
     Resolution,
@@ -17,6 +18,7 @@ from bcutils.bc_utils import (
     _get_start_end_dates,
     _get_exchange_for_code,
     _historical_prices_predicate,
+    _goto_login_page,
     _save_download_and_cleanup,
     _update_barchart_contract_file_async,
 )
@@ -40,6 +42,28 @@ def bc_config():
 
 
 class TestDownloader:
+    def test_login_navigation_retries_timeout_and_uses_domcontentloaded(self):
+        page = SimpleNamespace(
+            goto=AsyncMock(
+                side_effect=[
+                    PlaywrightTimeoutError("navigation timed out"),
+                    "response",
+                ]
+            ),
+            wait_for_timeout=AsyncMock(),
+        )
+
+        result = asyncio.run(_goto_login_page(page, "https://example.test/login"))
+
+        assert result == "response"
+        assert page.goto.await_count == 2
+        page.goto.assert_awaited_with(
+            "https://example.test/login",
+            wait_until="domcontentloaded",
+            timeout=45000,
+        )
+        page.wait_for_timeout.assert_awaited_once_with(2000)
+
     def test_contract_update_appends_without_rewriting_existing_rows(
         self, monkeypatch, tmp_path
     ):

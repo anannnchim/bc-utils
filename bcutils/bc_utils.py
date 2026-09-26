@@ -168,9 +168,30 @@ async def _launch_barchart_browser(
     return context, human
 
 
+async def _goto_login_page(page, url: str):
+    """Navigate without waiting for slow third-party page resources."""
+    max_attempts = 2
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return await page.goto(
+                url,
+                wait_until="domcontentloaded",
+                timeout=45000,
+            )
+        except PlaywrightTimeoutError:
+            if attempt == max_attempts:
+                raise
+            logger.warning(
+                "Barchart navigation timed out; retrying (%s/%s)",
+                attempt,
+                max_attempts,
+            )
+            await page.wait_for_timeout(2000)
+
+
 async def _login_async(human: Humanization, username: str, password: str) -> None:
     logger.info("step: goto barchart.com")
-    home_response = await human.page.goto(BARCHART_URL)
+    home_response = await _goto_login_page(human.page, BARCHART_URL)
     await _pause(human)
 
     allow_all = human.page.get_by_role("button", name="Allow all")
@@ -201,7 +222,7 @@ async def _login_async(human: Humanization, username: str, password: str) -> Non
         await _pause(human)
     else:
         logger.info("step: LOGIN link not present, verify persisted session")
-        await human.page.goto(BARCHART_URL + "login")
+        await _goto_login_page(human.page, BARCHART_URL + "login")
         await _pause(human)
 
     email_box = human.page.get_by_role("textbox", name="Login with Email")
